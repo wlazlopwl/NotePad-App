@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <group android:checkableBehavior="single"
+              >
+    <item
+        android:id="@+id/nav_my_notes"
+        android:title="My notes"
+        android:checked="true"
+        android:icon="@drawable/ic_folder_special_black_24dp"
+
+
+        app:actionViewClass="android.widget.TextView" />
+<!--    <item-->
+<!--        android:id="@+id/nav_bin_notes"-->
+<!--        android:title="Bin"-->
+<!--        />-->
+
+<item android:title="Others">
+
+    <item
+        android:id="@+id/nav_settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+
+        />
+    <item
+        android:id="@+id/nav_about"
+        android:title="About"
+        android:icon="@drawable/ic_info_black_24dp"
+        />
+
+</item>
+    </group>
+</menu>
