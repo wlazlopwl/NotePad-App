@@ -3,8 +3,8 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/new_note_change_color"
-        android:title="Chanke color"
-        android:icon="@drawable/ic_invert_colors_black_24dp"
+        android:title="Change color"
+        android:icon="@drawable/ic_brush_black_24dp"
         app:showAsAction="always">
     </item>
 

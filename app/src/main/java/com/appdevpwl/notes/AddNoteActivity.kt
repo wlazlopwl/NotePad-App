@@ -87,34 +87,43 @@ class AddNoteActivity : AppCompatActivity() {
                 val dialog = Dialog(this)
                 val dialogView = LayoutInflater.from(this).inflate(R.layout.layout_change_color, null)
                 dialog.setContentView(dialogView)
-                dialog.window.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
+
+//                dialog.window.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
                 val someView = findViewById<View>(R.id.idd)
                 val root = someView.rootView
                 var rgbColor: String
                 dialogView.color1.setOnClickListener {
 
                     rgbColor = resources.getString(R.color.color1)
-                    root.setBackgroundColor(Color.parseColor(rgbColor))
-
-                    dbHelper.updateNoteColor(idCheckedNote, rgbColor)
-                    colorBeforeSave = temporaryColorForNewNote(rgbColor)
-                    dialog.dismiss()
+                    onClickChangeColor(root, rgbColor, dialog)
                 }
                 dialogView.color2.setOnClickListener {
-
                     rgbColor = resources.getString(R.color.color2)
-                    root.setBackgroundColor(Color.parseColor(rgbColor))
-                    dbHelper.updateNoteColor(idCheckedNote, rgbColor)
-                    colorBeforeSave = temporaryColorForNewNote(rgbColor)
-                    dialog.dismiss()
+                    onClickChangeColor(root, rgbColor, dialog)
                 }
                 dialogView.color3.setOnClickListener {
-
                     rgbColor = resources.getString(R.color.color3)
-                    root.setBackgroundColor(Color.parseColor(rgbColor))
-                    dbHelper.updateNoteColor(idCheckedNote, rgbColor)
-                    colorBeforeSave = temporaryColorForNewNote(rgbColor)
-                    dialog.dismiss()
+                    onClickChangeColor(root, rgbColor, dialog)
+                }
+                dialogView.color4.setOnClickListener {
+                    rgbColor = resources.getString(R.color.color4)
+                    onClickChangeColor(root, rgbColor, dialog)
+                }
+                dialogView.color5.setOnClickListener {
+                    rgbColor = resources.getString(R.color.color5)
+                    onClickChangeColor(root, rgbColor, dialog)
+                }
+                dialogView.color6.setOnClickListener {
+                    rgbColor = resources.getString(R.color.color6)
+                    onClickChangeColor(root, rgbColor, dialog)
+                }
+                dialogView.color7.setOnClickListener {
+                    rgbColor = resources.getString(R.color.color7)
+                    onClickChangeColor(root, rgbColor, dialog)
+                }
+                dialogView.color8.setOnClickListener {
+                    rgbColor = resources.getString(R.color.color8)
+                    onClickChangeColor(root, rgbColor, dialog)
                 }
 
 
@@ -127,6 +136,14 @@ class AddNoteActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun onClickChangeColor(root: View, rgbColor: String, dialog: Dialog) {
+        root.setBackgroundColor(Color.parseColor(rgbColor))
+        dbHelper.updateNoteColor(idCheckedNote, rgbColor)
+        colorBeforeSave = temporaryColorForNewNote(rgbColor)
+        dialog.dismiss()
+    }
+
 
     private fun bundleExist(): Boolean {
         var bundle: Bundle? = intent.extras

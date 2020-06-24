@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="toolbar_title_text_size">25sp</dimen>
+    <dimen name="round_color_margin">15sp</dimen>
+    <dimen name="change_color_oval_border">2sp</dimen>
 
 </resources>

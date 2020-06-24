@@ -5,4 +5,9 @@
         <solid android:color="@color/color2"/>
     </shape>
 </item>
+    <item>
+        <shape android:shape="oval">
+            <stroke android:width="@dimen/change_color_oval_border" android:color="@android:color/black"/>
+        </shape>
+    </item>
 </layer-list>

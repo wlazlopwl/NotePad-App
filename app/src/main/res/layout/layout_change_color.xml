@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:orientation="vertical"
 
 >
 
@@ -11,21 +11,32 @@
         android:layout_height="wrap_content">
         <View
             android:id="@+id/color1"
-            android:layout_width="30dp" android:layout_height="30dp"
-        android:background="@drawable/change_color_1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/round_color_margin"
+            android:background="@drawable/change_color_1"
         >
         </View>
         <View
             android:id="@+id/color2"
-            android:layout_width="30dp" android:layout_height="30dp"
-              android:background="@drawable/change_color_2"
-        >
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/round_color_margin"
+            android:background="@drawable/change_color_2">
         </View>
         <View
             android:id="@+id/color3"
-            android:layout_width="30dp" android:layout_height="30dp"
-              android:background="@drawable/change_color_3"
-        >
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/round_color_margin"
+            android:background="@drawable/change_color_3">
+        </View>
+        <View
+            android:id="@+id/color4"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/round_color_margin"
+            android:background="@drawable/change_color_4">
         </View>
 
 
@@ -33,6 +44,37 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+        <View
+            android:id="@+id/color5"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/round_color_margin"
+            android:background="@drawable/change_color_5"
+        >
+        </View>
+        <View
+            android:id="@+id/color6"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/round_color_margin"
+            android:background="@drawable/change_color_6">
+        </View>
+        <View
+            android:id="@+id/color7"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/round_color_margin"
+            android:background="@drawable/change_color_7">
+        </View>
+        <View
+            android:id="@+id/color8"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/round_color_margin"
+            android:background="@drawable/change_color_8">
+        </View>
+
 
     </LinearLayout>
+
 </LinearLayout>
