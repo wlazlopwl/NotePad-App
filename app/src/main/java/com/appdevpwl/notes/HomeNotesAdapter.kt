@@ -5,6 +5,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,13 +56,16 @@ class HomeNotesAdapter(countNotes:Int) : RecyclerView.Adapter<MyViewHolder>()   
         val title = holder.view.simple_note_title
          val note = holder.view.simple_note_text
          val dateTimeNote = holder.view.simple_note_dateTime
-         val card = holder.view.simple_note_card_id
+         var card = holder.view.simple_note_card_id
         val id:Int = dbHelper.showAllNotes()[position].id
 
         title.text = dbHelper.showAllNotes()[position].textTitle
 
         note.text = dbHelper.showAllNotes()[position].textNote
-        dateTimeNote.text = dbHelper.showAllNotes()[position].updateDate
+        val time= dbHelper.showAllNotes()[position].updateDate!!.substring(0,5)
+        val date= dbHelper.showAllNotes()[position].updateDate!!.substring(8)
+        dateTimeNote.text = time + date
+        card.setCardBackgroundColor(Color.parseColor(dbHelper.showAllNotes()[position].noteColor))
 
         holder.view.setOnLongClickListener(){
 
@@ -81,7 +85,7 @@ class HomeNotesAdapter(countNotes:Int) : RecyclerView.Adapter<MyViewHolder>()   
             duplicate.setOnClickListener(){
                 addNoteActivity= AddNoteActivity()
                 val dNote= dbHelper.getNoteById(id)
-                val duplicateNote: Note = Note(dNote.get(0).textTitle.toString(),dNote.get(0).textNote.toString(), addNoteActivity.getActualTime())
+                val duplicateNote: Note = Note(dNote.get(0).textTitle.toString(),dNote.get(0).textNote.toString(), addNoteActivity.getActualTime(),dNote.get(0).noteColor.toString())
 
                 dbHelper.addNote(duplicateNote)
                 countNotes += 1

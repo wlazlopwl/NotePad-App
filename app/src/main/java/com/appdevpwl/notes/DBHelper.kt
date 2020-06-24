@@ -11,19 +11,19 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DB_NAME,null, DB_VER
 
     companion object{
         val DB_NAME = "allNotes.db"
-        val DB_VERSION = 1
+        val DB_VERSION = 2
         val TABLE_NAME ="Notes"
         val KEY_ID = "id"
         val KEY_TITLE="title"
         val KEY_TEXT="text"
         val KEY_DATE="date"
+        val KEY_COLOR="color"
 
         private val SQL_CERATE_ENTRIES ="CREATE TABLE "+ TABLE_NAME+"("+ KEY_ID+ " INTEGER PRIMARY KEY,"+ KEY_TEXT+" TEXT,"+ KEY_TITLE+" TEXT," + KEY_DATE+ " TEXT"+")"
 
         private val SQL_DELETE_ENTRIES="DROP TABLE IF EXIST" + TABLE_NAME
         private val SQL_UPDATE_NOTE="DROP TABLE IF EXIST" + TABLE_NAME
-
-
+        private val SQL_UPGRADE_DB_1_TO_2="ALTER TABLE "+ TABLE_NAME+" ADD COLUMN "+ KEY_COLOR+" TEXT DEFAULT '#FFFFFF'"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -31,8 +31,11 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DB_NAME,null, DB_VER
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL(SQL_DELETE_ENTRIES)
-        onCreate(db)
+//        db?.execSQL(SQL_DELETE_ENTRIES)
+//        onCreate(db)
+        if(newVersion==2){
+            db?.execSQL(SQL_UPGRADE_DB_1_TO_2)
+        }
     }
     fun deleteNote(id:Int){
         val db=this.writableDatabase
@@ -53,6 +56,13 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DB_NAME,null, DB_VER
 
 
     }
+    fun updateNoteColor(id:Int,RGBcolor:String) {
+        val values = ContentValues()
+        values.put(KEY_COLOR,RGBcolor)
+        val db=this.writableDatabase
+        db.update(TABLE_NAME,values,"id='"+id+"'",null)
+
+    }
     fun countAllNotes():Int{
         val cursor : Cursor
         val db=readableDatabase
@@ -68,6 +78,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DB_NAME,null, DB_VER
         values.put(KEY_TITLE, note.textTitle)
         values.put(KEY_TEXT, note.textNote)
         values.put(KEY_DATE,note.updateDate)
+         values.put(KEY_COLOR,note.noteColor)
         val db= this.writableDatabase
         db.insert(TABLE_NAME,null,values)
         db.close()
@@ -89,14 +100,15 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DB_NAME,null, DB_VER
         var textTitle: String
         var textNote: String
         var updateDate: String
-
+        var noteColor :String
         if (cursor!!.moveToFirst()) {
             while (!cursor.isAfterLast){
                 id=cursor.getInt(cursor.getColumnIndex(KEY_ID))
                 textTitle=cursor.getString(cursor.getColumnIndex(KEY_TITLE))
                 textNote=cursor.getString(cursor.getColumnIndex(KEY_TEXT))
                 updateDate=cursor.getString(cursor.getColumnIndex(KEY_DATE))
-                note.add(Note(id,textTitle,textNote,updateDate))
+                noteColor=cursor.getString(cursor.getColumnIndex(KEY_COLOR))
+                note.add(Note(id,textTitle,textNote,updateDate, noteColor))
                 cursor.moveToNext()
             }
 
@@ -121,6 +133,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DB_NAME,null, DB_VER
         var textTitle: String
         var textNote: String
         var updateDate: String
+        var noteColor :String
 
         if (cursor!!.moveToFirst()) {
             while (!cursor.isAfterLast){
@@ -128,7 +141,8 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DB_NAME,null, DB_VER
                 textTitle=cursor.getString(cursor.getColumnIndex(KEY_TITLE))
                 textNote=cursor.getString(cursor.getColumnIndex(KEY_TEXT))
                 updateDate=cursor.getString(cursor.getColumnIndex(KEY_DATE))
-                notes.add(Note(id,textTitle,textNote,updateDate))
+                noteColor=cursor.getString(cursor.getColumnIndex(KEY_COLOR))
+                notes.add(Note(id,textTitle,textNote,updateDate,noteColor))
                 cursor.moveToNext()
             }
 
