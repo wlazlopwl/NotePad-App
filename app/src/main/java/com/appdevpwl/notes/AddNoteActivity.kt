@@ -1,8 +1,14 @@
 package com.appdevpwl.notes
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
@@ -11,6 +17,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_add_note.*
+import kotlinx.android.synthetic.main.layout_change_color.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -19,6 +26,7 @@ class AddNoteActivity : AppCompatActivity() {
     private lateinit var actualTextTitle:String
     private lateinit var actualTextNote:String
     private lateinit var  sharedPreferences: SharedPreferences
+
     private var idCheckedNote:Int = 1
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +46,7 @@ class AddNoteActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
+
 
 
 
@@ -66,6 +75,53 @@ class AddNoteActivity : AppCompatActivity() {
 
 
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater=menuInflater
+        inflater.inflate(R.menu.new_note_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.new_note_change_color ->{
+
+                val dialog = Dialog(this)
+                val dialogView = LayoutInflater.from(this).inflate(R.layout.layout_change_color,null)
+                dialog.setContentView(dialogView)
+                dialog.window.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
+
+
+                dialogView.color1.setOnClickListener { v ->
+                    val someView = findViewById<View>(R.id.idd)
+                    val root = someView.rootView
+                    root.setBackgroundColor(Color.parseColor(resources.getString(R.color.color1)));
+                    dialog.dismiss()
+                }
+                dialogView.color2.setOnClickListener { v ->
+                    val someView = findViewById<View>(R.id.idd)
+                    val root = someView.rootView
+                    root.setBackgroundColor(Color.parseColor(resources.getString(R.color.color2)));
+                    dialog.dismiss()
+                }
+                dialogView.color3.setOnClickListener { v ->
+                    val someView = findViewById<View>(R.id.idd)
+                    val root = someView.rootView
+                    root.setBackgroundColor(Color.parseColor(resources.getString(R.color.color3)));
+                    dialog.dismiss()
+                }
+
+
+
+                dialog.show()
+
+                return true
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
 
